@@ -2,7 +2,8 @@ clc;
 clear all;
 close all;
 
-%% Testing
+%% 3-way Currency Arbitrage Optimization
+%with exchange rate variation
 addpath('functions');
 
 %cad, usd, eur
@@ -49,8 +50,8 @@ fminconRates=EXrates
 profit = -fval-x0
 gain = profit/x0
 
-optRes(fval, profit, gain, out.iterations, out.funcCount,'FMResults');
-ratesRes(fminconRates,'fminconRates');
+optRes(fval, profit, gain, out.iterations, out.funcCount,'vFMResults');
+ratesRes(fminconRates,'vFMRates');
 
 opts = optimoptions('ga');
 opts.FunctionTolerance = 1E-6;
@@ -62,12 +63,12 @@ gaRates=EXrates
 profit2 = -fval2-x0
 gain2 = profit2/x0
 
-optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'GAResults');
-ratesRes(gaRates,'gaRates');
+optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'vGAResults');
+ratesRes(gaRates,'vGARates');
 
-xTable(x,x2);
+xTable(x,x2,'vX_Results');
 
-%%Copy Latex files to folder then delete
+%%Move Latex files to folder
 movefile *.tex Report/latex/tables
 
 %% Functions
@@ -112,14 +113,14 @@ function [c,ceq]=varyRates(x)
     c(1) = -((EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
 end
 
-function xTable(x1,x2)
+function xTable(x1,x2,name)
     
-    X_Opt.X = { '$CAD2CAD' '$USD2CAD' '$EUR2CAD'...
-        '$CAD2USD' '$USD2USD' '$EUR2USD' '$CAD2EUR' '$USD2EUR' '$EUR2EUR'...
+    X_Opt.X = { '\$CAD2CAD' '\$USD2CAD' '\$EUR2CAD'...
+        '\$CAD2USD' '\$USD2USD' '\$EUR2USD' '\$CAD2EUR' '\$USD2EUR' '\$EUR2EUR'...
         'Rate CAD2USD' 'Rate CAD2EUR' 'Rate USD2EUR' }';
     X_Opt.FMOptima = x1';
     X_Opt.GAOptima = x2';
     X_Opt=struct2table(X_Opt);
-    table2latex(X_Opt,'X_Optima');
+    table2latex(X_Opt,name);
 
 end

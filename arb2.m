@@ -3,7 +3,10 @@ clear all;
 close all;
 
 %% 2-way Currency Arbitrage Optimization
-%With transfer fees
+%With transfer fees via TransferWise
+%https://transferwise.com/ca
+
+addpath('functions');
 
 %transfer fee polyfits from TransferWise fees
 global pUSD
@@ -11,14 +14,15 @@ global pCAD
 [pUSD, pCAD] = fees();
 
 %initial $10k USD
-x0=10000;
+x0=10; %thousand
 
 A = [];
 b = [];
 Aeq = [];
 beq = [];
-lb = [0,0,1.2,1.2];
-ub = [x0,60000,1.5,1.5];
+%bounds with 5y high/low, x0 of 
+lb = [0,0,1.19558,1.19558];
+ub = [x0,60,1.46520,1.46520];
 nonlcon=@trade2MAX;
 xStart = [1000 1000 1.4 1.4];
 
@@ -29,12 +33,22 @@ xStart = [1000 1000 1.4 1.4];
 % min(4) = rate for transfer 2
 
 [min, fval, exit, out] = fmincon(@optimize,xStart,A,b,Aeq,beq,lb,ub,nonlcon);
-profit = -fval-x0
-T = table(min','VariableNames',{'fminconOptima'})
 
-[min2,fval2,exitflag,output,population,scores] = ga(@optimize, 4, [],[],[],[],lb,ub,nonlcon);
+profit = -fval-x0
+gain = profit/x0
+optRes(fval, profit, gain, out.iterations, out.funcCount,'2FMResults');
+
+[min2,fval2,exitflag,out2,population,scores] = ga(@optimize, 4, [],[],[],[],lb,ub,nonlcon);
+
 profit2 = -fval2-x0
-T2 = table(min2','VariableNames',{'gaOptima'})
+gain2 = profit2/x0
+
+optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'2GAResults');
+
+xTable(min,min2,'2aXOpt');
+
+%%Move Latex files to folder
+movefile *.tex Report/latex/tables
 
 %% Functions
 
@@ -79,15 +93,36 @@ function [p1, p2] = fees()
     feeCAD = polyval(p2,x);
     
   
-%     figure
-%     plot(x,yCAD,'o')
-%     hold on
-%     plot(x,yUSD,'r*')
-%     plot(x,feeUSD,'r-')
-%     plot(x,feeCAD,'b-')
-%     axis([0  15000  0  150])
-%     hold off
+    f=figure
+    plot(x,yCAD,'o')
+    hold on
+    grid on
+    title('TransferWise Fees USD/CAD')
+    plot(x,yUSD,'r*')
+    plot(x,feeUSD,'r-')
+    plot(x,feeCAD,'b-')
+    axis([0  15000  0  150])
+    ylabel('$ Fee Cost')
+    xlabel('$ Transfer Amount')
+    legend('CAD Fee Points','USD Fee Points','Polyfit USD Fee','Polyfit CAD Fee','Location','southeast');
+    hold off
+    saveas(f,'fees.png')
+    movefile *.png Report/latex/figures
+
 end
+
+
+function xTable(x1,x2,name)
+    
+    X_Opt.X = { '\$USD2CAD' '\$CAD2USD'...
+        'Rate USD2CAD' 'Rate CAD2USD' }';
+    X_Opt.FMOptima = x1';
+    X_Opt.GAOptima = x2';
+    X_Opt=struct2table(X_Opt);
+    table2latex(X_Opt,name);
+
+end
+
 
 %% Results
 % Local minimum found that satisfies the constraints.
@@ -100,31 +135,21 @@ end
 % 
 % profit =
 % 
-%    2.3394e+04
+%    40.6635
 % 
 % 
-% T =
+% gain =
 % 
-%   table
-% 
-%              fminconOptima          
-%     ________________________________
-% 
-%     10000    43552      1.5      1.2
+%     4.0664
 % 
 % Optimization terminated: average change in the fitness value less than options.FunctionTolerance
 %  and constraint violation is less than options.ConstraintTolerance.
 % 
 % profit2 =
 % 
-%    2.2694e+04
+%    40.6635
 % 
 % 
-% T2 =
+% gain2 =
 % 
-%   table
-% 
-%                   gaOptima              
-%     ____________________________________
-% 
-%     9861.4     42386    1.4901     1.221
+%     4.0664
