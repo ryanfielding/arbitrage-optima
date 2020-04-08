@@ -45,12 +45,11 @@ ub = [0,10,10,10,0,10,10,10,0,0.8,0.75,1.0];
 [x, fval, exit, out] = fmincon(@optimize,xGuess,A,b,Aeq,beq,lb,ub,nonlcon);
 
 fminconRates=EXrates
-T = table(x','VariableNames',{'fminconOptima'})
 profit = -fval-x0
 gain = profit/x0
 
-FMResults(fval, profit, gain, out.iterations, out.funcCount,'FMResults');
-RatesResults(fminconRates,'fminconRates');
+optRes(fval, profit, gain, out.iterations, out.funcCount,'FMResults');
+ratesRes(fminconRates,'fminconRates');
 
 opts = optimoptions('ga');
 opts.FunctionTolerance = 1E-6;
@@ -59,12 +58,19 @@ opts.ConstraintTolerance = 1E-6;
 [x2, fval2, exit2, out2] = ga(@optimize,12,A,b,Aeq,beq,lb,ub,nonlcon,opts);
 
 gaRates=EXrates
-T2 = table(x2','VariableNames',{'gaOptima'})
 profit2 = -fval2-x0
 gain2 = profit2/x0
 
-GAResults(fval2, profit2, gain2, out2.generations, out2.funccount,'GAResults');
-RatesResults(gaRates,'gaRates');
+optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'GAResults');
+ratesRes(gaRates,'gaRates');
+
+X_Opt.X = { '$CAD2CAD' '$USD2CAD' '$EUR2CAD'...
+    '$CAD2USD' '$USD2USD' '$EUR2USD' '$CAD2EUR' '$USD2EUR' '$EUR2EUR'...
+    'Rate CAD2USD' 'Rate CAD2EUR' 'Rate USD2EUR' }';
+X_Opt.FMOptima = x';
+X_Opt.GAOptima = x2';
+X_Opt=struct2table(X_Opt);
+table2latex(X_Opt,'X_Optima');
 
 %%Copy Latex files to folder
 %copyfile P* Report/figures
@@ -109,31 +115,4 @@ function [c,ceq]=varyRates(x)
     %f <= -x0 to ensure gains are the only found optima
     %f = -(x0 + (EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
     c(1) = -((EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
-end
-
-function FMResults(opt, profit, gain, iters, funcVals, name)
-    Res.Optimum = opt;
-    Res.Profit = profit;
-    Res.Gain = gain;
-    Res.Iterations = iters.';
-    Res.FuncEvals = funcVals.';
-    Res = struct2table(Res);
-    table2latex(Res,name);
-end
-function GAResults(opt, profit, gain, gens, funcVals, name)
-    Res.Optimum = opt;
-    Res.Profit = profit;
-    Res.Gain = gain;
-    Res.Generations = gens.';
-    Res.FuncCount = funcVals.';
-    Res = struct2table(Res);
-    table2latex(Res,name);
-end
-
-function RatesResults(rates,name)
-    Res.CAD = rates(:,1);
-    Res.USD = rates(:,2);
-    Res.EUR = rates(:,3);
-    Res = struct2table(Res);
-    table2latex(Res,name);
 end
