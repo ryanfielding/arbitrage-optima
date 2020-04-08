@@ -3,6 +3,7 @@ clear all;
 close all;
 
 %% Testing
+addpath('functions');
 
 %cad, usd, eur
 %col by row means currency 1 to currency 2
@@ -36,7 +37,7 @@ b = [];
 %xGuess=[0,1.45956047181335,4.36166553397463,7.27194070618012,0,5.64212289465898,0.00552664825793103,9.99999998644946,0,0.799999995962151,0.600000004715667,0.999999986584457];
 %finds 1.147
 %xGuess=[0,9.99242501921721,1.60319216391258e-06,1.79994172185933,0,8.85986264219077,9.99999984985734,1.60089391853419,0,0.650000000000000,0.749999981783946,0.850000000000000];
-%finds 0.3819
+%finds 0.3145
 xGuess=[0,8.75266172520550,2.32746313743225,8.64661087348664,0,6.68752910409166,7.12717579347866,4.84865467546798,0,0.680176110219948,0.675591051281899,0.866237297766703];
 
 nonlcon=@varyRates;
@@ -64,16 +65,10 @@ gain2 = profit2/x0
 optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'GAResults');
 ratesRes(gaRates,'gaRates');
 
-X_Opt.X = { '$CAD2CAD' '$USD2CAD' '$EUR2CAD'...
-    '$CAD2USD' '$USD2USD' '$EUR2USD' '$CAD2EUR' '$USD2EUR' '$EUR2EUR'...
-    'Rate CAD2USD' 'Rate CAD2EUR' 'Rate USD2EUR' }';
-X_Opt.FMOptima = x';
-X_Opt.GAOptima = x2';
-X_Opt=struct2table(X_Opt);
-table2latex(X_Opt,'X_Optima');
+xTable(x,x2);
 
-%%Copy Latex files to folder
-%copyfile P* Report/figures
+%%Copy Latex files to folder then delete
+movefile *.tex Report/latex/tables
 
 %% Functions
 
@@ -115,4 +110,16 @@ function [c,ceq]=varyRates(x)
     %f <= -x0 to ensure gains are the only found optima
     %f = -(x0 + (EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
     c(1) = -((EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
+end
+
+function xTable(x1,x2)
+    
+    X_Opt.X = { '$CAD2CAD' '$USD2CAD' '$EUR2CAD'...
+        '$CAD2USD' '$USD2USD' '$EUR2USD' '$CAD2EUR' '$USD2EUR' '$EUR2EUR'...
+        'Rate CAD2USD' 'Rate CAD2EUR' 'Rate USD2EUR' }';
+    X_Opt.FMOptima = x1';
+    X_Opt.GAOptima = x2';
+    X_Opt=struct2table(X_Opt);
+    table2latex(X_Opt,'X_Optima');
+
 end
