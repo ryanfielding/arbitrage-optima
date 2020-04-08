@@ -2,7 +2,8 @@ clc;
 clear all;
 close all;
 
-%% Testing
+%% 3-way Currency Arbitrage Optimization
+addpath('functions');
 
 %cad, usd, eur
 %col by row means currency 1 to currency 2
@@ -42,10 +43,11 @@ ub = [0,10,10,10,0,10,10,10,0];
 [x, fval, exit, out] = fmincon(@optimize,xGuess,A,b,Aeq,beq,lb,ub);
 
 fminconRates=EXrates
-T = table(x','VariableNames',{'fminconOptima'})
 profit = -fval-x0
 gain = profit/x0
 
+optRes(fval, profit, gain, out.iterations, out.funcCount,'aFMResults');
+ratesRes(fminconRates,'aFMRates');
 
 opts = optimoptions('ga');
 opts.FunctionTolerance = 1E-6;
@@ -54,9 +56,16 @@ ub = [0,10,10,15,0,10,15,10,0];
 [x2, fval2, exit2, out2] = ga(@optimize,9,A,b,Aeq,beq,lb,ub,[],opts);
 
 gaRates=EXrates
-T2 = table(x2','VariableNames',{'gaOptima'})
 profit2 = -fval2-x0
 gain2 = profit2/x0
+
+optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'aGAResults');
+ratesRes(gaRates,'aGARates');
+
+xTable(x,x2,'aX_Results');
+
+%%Move Latex files to folder
+movefile *.tex Report/latex/tables
 
 %% Functions
 
@@ -67,6 +76,18 @@ function f = optimize(x)
     %conversions to other currencies
     f = -(x0 + (EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
 end
+
+function xTable(x1,x2,name)
+    
+    X_Opt.X = { '\$CAD2CAD' '\$USD2CAD' '\$EUR2CAD'...
+        '\$CAD2USD' '\$USD2USD' '\$EUR2USD' '\$CAD2EUR' '\$USD2EUR' '\$EUR2EUR'}';
+    X_Opt.FMOptima = x1';
+    X_Opt.GAOptima = x2';
+    X_Opt=struct2table(X_Opt);
+    table2latex(X_Opt,name);
+
+end
+
 
 %% Results
 % Local minimum found that satisfies the constraints.
