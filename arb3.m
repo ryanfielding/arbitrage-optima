@@ -10,16 +10,11 @@ addpath('functions');
 %eg. element (2,1) is cad to usd exchange rate
 cad2usd = 0.7085;
 cad2eur = 0.6559;
-cad2yen = 77.2049;
 usd2cad = 1.4113;
 usd2eur = 0.9260;
-usd2yen = 108.833;
 eur2cad = 1.52448;
 eur2usd = 1.0799;
-eur2yen = 117.618;
-yen2cad = 0.0129508;
-yen2usd = 0.00918840;
-yen2eur = 0.00850212;
+
 global EXrates x0
 %initial amount 10000 CAD
 x0 = 10; %thousand
@@ -47,7 +42,6 @@ profit = -fval-x0
 gain = profit/x0
 
 optRes(fval, profit, gain, out.iterations, out.funcCount,'aFMResults');
-ratesRes(fminconRates,'aFMRates');
 
 opts = optimoptions('ga');
 opts.FunctionTolerance = 1E-6;
@@ -60,7 +54,6 @@ profit2 = -fval2-x0
 gain2 = profit2/x0
 
 optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'aGAResults');
-ratesRes(gaRates,'aGARates');
 
 xTable(x,x2,'aX_Results');
 
