@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  8 APR 2020 13:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  8 APR 2020 22:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -438,40 +438,30 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_below_intertext_sep=\dimen154
 \l_MT_above_shortintertext_sep=\dimen155
 \l_MT_below_shortintertext_sep=\dimen156
-) (./main.aux (./tables/vFMResults.aux) (./tables/vFMRates.aux) (./tables/vGARe
-sults.aux)
-(./tables/vGARates.aux) (./tables/vX_Results.aux)
-
-LaTeX Warning: Label `tab:bumpFM' multiply defined.
-
-
-LaTeX Warning: Label `tab:bumpFM' multiply defined.
-
-
-LaTeX Warning: Label `tab:bumpFM' multiply defined.
-
-
-LaTeX Warning: Label `tab:bumpFM' multiply defined.
-
-)
+) (./main.aux (./tables/2FMResults.aux) (./tables/2GAResults.aux) (./tables/2aX
+Opt.aux)
+(./tables/aFMResults.aux) (./tables/aGAResults.aux) (./tables/aX_Results.aux)
+(./tables/vFMResults.aux) (./tables/vFMRates.aux) (./tables/vGAResults.aux)
+(./tables/vGARates.aux) (./tables/vX_Results.aux) (./tables/vGATrials.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 28.
- (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 31.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 *geometry* driver: auto-detecting
@@ -543,7 +533,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box59
-Package hyperref Info: Link coloring OFF on input line 28.
+Package hyperref Info: Link coloring OFF on input line 31.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -553,21 +543,21 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count162
 )
-LaTeX Info: Redefining \ref on input line 28.
-LaTeX Info: Redefining \pageref on input line 28.
-LaTeX Info: Redefining \nameref on input line 28.
+LaTeX Info: Redefining \ref on input line 31.
+LaTeX Info: Redefining \pageref on input line 31.
+LaTeX Info: Redefining \nameref on input line 31.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 30.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 33.
  [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 31.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 34.
  (./main.toc
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
@@ -584,70 +574,158 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 \openout6 = `main.lot'.
 
  [3]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 41.
+
+<figures/rate.png, id=165, 806.01125pt x 263.98625pt>
+File: figures/rate.png Graphic file (type png)
+ <use figures/rate.png>
+Package pdftex.def Info: figures/rate.png used on input line 52.
+(pdftex.def)             Requested size: 422.77664pt x 138.46997pt.
+
+[4 <./figures/rate.png>] <figures/flow.png, id=176, 518.93875pt x 264.99pt>
+File: figures/flow.png Graphic file (type png)
+
+<use figures/flow.png>
+Package pdftex.def Info: figures/flow.png used on input line 64.
+(pdftex.def)             Requested size: 234.8775pt x 119.93987pt.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 73.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ¢ in font ptmr7t!
+ [5 <./figures/flow.png>]
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ¢ in font ptmr7t!
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ¢ in font ptmr7t!
+ <figures/fees.png, id=188, 562.2606pt x 421.575pt>
+File: figures/fees.png Graphic file (type png)
+
+<use figures/fees.png>
+Package pdftex.def Info: figures/fees.png used on input line 141.
+(pdftex.def)             Requested size: 422.77664pt x 316.99098pt.
+ [6] [7 <./figures/fees.png (PNG copy)>]
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ¢ in font ptmr7t!
+ [8]
+\openout2 = `tables/2FMResults.aux'.
+
+
+(./tables/2FMResults.tex)
+\openout2 = `tables/2GAResults.aux'.
+
+ (./tables/2GAResults.tex)
+\openout2 = `tables/2aXOpt.aux'.
+
+ (./tables/2aXOpt.tex)
+\openout2 = `tables/aFMResults.aux'.
+
+
+(./tables/aFMResults.tex)
+\openout2 = `tables/aGAResults.aux'.
+
+ (./tables/aGAResults.tex) [9
+
+
+
+
+
+
+
+
+]
+\openout2 = `tables/aX_Results.aux'.
+
+
+(./tables/aX_Results.tex)
 \openout2 = `tables/vFMResults.aux'.
 
-
-(./tables/vFMResults.tex)
+ (./tables/vFMResults.tex)
 \openout2 = `tables/vFMRates.aux'.
 
  (./tables/vFMRates.tex)
 \openout2 = `tables/vGAResults.aux'.
 
- (./tables/vGAResults.tex)
+
+(./tables/vGAResults.tex) [10
+
+
+
+
+
+
+
+
+]
 \openout2 = `tables/vGARates.aux'.
 
-
-(./tables/vGARates.tex)
+ (./tables/vGARates.tex)
 \openout2 = `tables/vX_Results.aux'.
 
- (./tables/vX_Results.tex) [4
+ (./tables/vX_Results.tex)
+\openout2 = `tables/vGATrials.aux'.
+
+ (./tables/vGATrials.tex) [11
 
 
 
 
 
 
+] [12
 
 
-] [5
+] [13] (./main.bbl
+Underfull \hbox (badness 3930) in paragraph at lines 50--54
+[]\OT1/ptm/m/it/12 Investopedia\OT1/ptm/m/n/12 . [On-line]. Avail-able: []$http
+s : / / www . investopedia . com / trading /
+ []
 
-
-] (./main.bbl
-Missing character: There is no Ã in font ptmr7t!
-Missing character: There is no ­ in font ptmr7t!
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 92.
- [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 92.
-
-(./main.aux (./tables/vFMResults.aux) (./tables/vFMRates.aux)
-(./tables/vGAResults.aux) (./tables/vGARates.aux) (./tables/vX_Results.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 92.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 92.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 343.
+ [14]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 343.
+ (./main.aux (./tables/2FMResults.aux) (./tables/2GAResults.aux)
+(./tables/2aXOpt.aux) (./tables/aFMResults.aux) (./tables/aGAResults.aux)
+(./tables/aX_Results.aux) (./tables/vFMResults.aux) (./tables/vFMRates.aux)
+(./tables/vGAResults.aux) (./tables/vGARates.aux) (./tables/vX_Results.aux)
+(./tables/vGATrials.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 343.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 343.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F490761256629D80DFFBF02B1D06E1EA;204.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 92.
+(rerunfilecheck)             Checksum: 3937A32E1E9E2C78E85FBE60AA996B11;1398.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 343.
  ) 
 Here is how much of TeX's memory you used:
- 8935 strings out of 492995
- 136668 string characters out of 6132704
- 240660 words of memory out of 5000000
- 12312 multiletter control sequences out of 15000+600000
- 22330 words of font info for 49 fonts, out of 8000000 for 9000
+ 9130 strings out of 492995
+ 139746 string characters out of 6132704
+ 250829 words of memory out of 5000000
+ 12395 multiletter control sequences out of 15000+600000
+ 24970 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,8n,43p,264b,334s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,15n,43p,579b,344s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/201
-7/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-di
-st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (6 pages, 42261 bytes).
+exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/te
+xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texl
+ive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texliv
+e/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
+017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
+17/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-d
+ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/
+type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (14 pages, 323469 bytes).
 PDF statistics:
- 88 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
- 21 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 319 PDF objects out of 1000 (max. 8388607)
+ 285 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 176 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -39,11 +39,12 @@ b = [];
 %finds 1.147
 %xGuess=[0,9.99242501921721,1.60319216391258e-06,1.79994172185933,0,8.85986264219077,9.99999984985734,1.60089391853419,0,0.650000000000000,0.749999981783946,0.850000000000000];
 %finds 0.3145
-xGuess=[0,8.75266172520550,2.32746313743225,8.64661087348664,0,6.68752910409166,7.12717579347866,4.84865467546798,0,0.680176110219948,0.675591051281899,0.866237297766703];
+%xGuess=[0,8.75266172520550,2.32746313743225,8.64661087348664,0,6.68752910409166,7.12717579347866,4.84865467546798,0,0.680176110219948,0.675591051281899,0.866237297766703];
 
 nonlcon=@varyRates;
-lb = [0,0,0,0,0,0,0,0,0, 0.65, 0.60, 0.85];
-ub = [0,10,10,10,0,10,10,10,0,0.8,0.75,1.0];
+lb = [0,0,0,0,0,0,0,0,0,0.68250,0.61961,0.79937];
+ub = [0,10,10,10,0,10,10,10,0,0.83642,0.76188,0.96242];
+xGuess = ub;
 [x, fval, exit, out] = fmincon(@optimize,xGuess,A,b,Aeq,beq,lb,ub,nonlcon);
 
 fminconRates=EXrates
@@ -67,6 +68,23 @@ optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'vGAResults');
 ratesRes(gaRates,'vGARates');
 
 xTable(x,x2,'vX_Results');
+
+%% Run GA a few times
+X_OptGA.Data = { 'Optimum' '\$CAD2CAD' '\$USD2CAD' '\$EUR2CAD'...
+        '\$CAD2USD' '\$USD2USD' '\$EUR2USD' '\$CAD2EUR' '\$USD2EUR' '\$EUR2EUR'...
+        'Rate CAD2USD' 'Rate CAD2EUR' 'Rate USD2EUR' }';
+for i=1:6 
+    [x3, fval3, exit3, out3] = ga(@optimize,12,A,b,Aeq,beq,lb,ub,nonlcon,opts);
+    Trial(i,:) = [fval3 x3];
+end
+X_OptGA.Run1=Trial(1,:)';
+X_OptGA.Run2=Trial(2,:)';
+X_OptGA.Run3=Trial(3,:)';
+X_OptGA.Run4=Trial(4,:)';
+X_OptGA.Run5=Trial(5,:)';
+X_OptGA.Run6=Trial(6,:)';
+X_OptGA=struct2table(X_OptGA);
+table2latex(X_OptGA,'vGATrials');
 
 %%Move Latex files to folder
 movefile *.tex Report/latex/tables

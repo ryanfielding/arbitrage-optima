@@ -21,11 +21,34 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{func}
+\bibitem{rate}
 \BIBentryALTinterwordspacing
-V.~Martínez-Cagigal, \emph{MATLAB Table to LaTeX conversor}. [Online].
-  Available:
-  \url{https://www.mathworks.com/matlabcentral/fileexchange/69063-matlab-table-to-latex-conversor}
+\emph{USD/CAD}. [Online]. Available:
+  \url{https://finance.yahoo.com/quote/CAD=X?.tsrc=applewf}
+\BIBentrySTDinterwordspacing
+
+\bibitem{tw}
+\BIBentryALTinterwordspacing
+\emph{A cheaper, faster way to send money abroad}. [Online]. Available:
+  \url{https://transferwise.com/ca}
+\BIBentrySTDinterwordspacing
+
+\bibitem{invest}
+\BIBentryALTinterwordspacing
+\emph{Currency Arbitrage}. [Online]. Available:
+  \url{https://www.investopedia.com/terms/c/currency-arbitrage.asp}
+\BIBentrySTDinterwordspacing
+
+\bibitem{xe}
+\BIBentryALTinterwordspacing
+\emph{USD/CAD}. [Online]. Available:
+  \url{https://www.xe.com/currencyconverter/convert/?Amount=1&From=USD&To=CAD}
+\BIBentrySTDinterwordspacing
+
+\bibitem{corr}
+\BIBentryALTinterwordspacing
+\emph{Investopedia}. [Online]. Available:
+  \url{https://www.investopedia.com/trading/using-currency-correlations-advantage/}
 \BIBentrySTDinterwordspacing
 \renewcommand{\BIBentryALTinterwordstretchfactor}{4}
 

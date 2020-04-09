@@ -1,5 +1,16 @@
-\contentsline {table}{\numberline {1}{\ignorespaces Keane's Bump - \textbf {fmincon} Results\relax }}{4}{table.caption.4}
-\contentsline {table}{\numberline {2}{\ignorespaces Keane's Bump - \textbf {fmincon} Results\relax }}{4}{table.caption.5}
-\contentsline {table}{\numberline {3}{\ignorespaces Keane's Bump - \textbf {fmincon} Results\relax }}{4}{table.caption.6}
-\contentsline {table}{\numberline {4}{\ignorespaces Keane's Bump - \textbf {fmincon} Results\relax }}{4}{table.caption.7}
-\contentsline {table}{\numberline {5}{\ignorespaces Keane's Bump - \textbf {fmincon} Results\relax }}{5}{table.caption.8}
+\contentsline {table}{\numberline {1}{\ignorespaces Exchange Rates\relax }}{6}{table.caption.6}
+\contentsline {table}{\numberline {2}{\ignorespaces Problem Variables, 3-way\relax }}{6}{table.caption.7}
+\contentsline {table}{\numberline {3}{\ignorespaces Problem Variables, 3-way, Variable Rates\relax }}{6}{table.caption.8}
+\contentsline {table}{\numberline {4}{\ignorespaces Variable Exchange Rates\relax }}{8}{table.caption.10}
+\contentsline {table}{\numberline {5}{\ignorespaces 2-way Arbitrage - \textbf {fmincon} Results\relax }}{9}{table.caption.11}
+\contentsline {table}{\numberline {6}{\ignorespaces 2-way Arbitrage - \textbf {ga} Results\relax }}{9}{table.caption.12}
+\contentsline {table}{\numberline {7}{\ignorespaces 2-way Arbitrage Results Comparison\relax }}{9}{table.caption.13}
+\contentsline {table}{\numberline {8}{\ignorespaces 3-way Arbitrage - \textbf {fmincon} Results\relax }}{9}{table.caption.14}
+\contentsline {table}{\numberline {9}{\ignorespaces 3-way Arbitrage - \textbf {ga} Results\relax }}{10}{table.caption.15}
+\contentsline {table}{\numberline {10}{\ignorespaces 3-way Arbitrage Results Comparison\relax }}{10}{table.caption.16}
+\contentsline {table}{\numberline {11}{\ignorespaces 3-way Arbitrage, Variable Rates - \textbf {fmincon} Results\relax }}{10}{table.caption.17}
+\contentsline {table}{\numberline {12}{\ignorespaces 3-way Arbitrage, Variable Rates - \textbf {fmincon} Exchange Rates\relax }}{10}{table.caption.18}
+\contentsline {table}{\numberline {13}{\ignorespaces 3-way Arbitrage, Variable Rates - \textbf {ga} Results\relax }}{11}{table.caption.19}
+\contentsline {table}{\numberline {14}{\ignorespaces 3-way Arbitrage, Variable Rates - \textbf {ga} Exchange Rates\relax }}{11}{table.caption.20}
+\contentsline {table}{\numberline {15}{\ignorespaces 3-way Arbitrage, Variable Rates Results Comparison\relax }}{11}{table.caption.21}
+\contentsline {table}{\numberline {16}{\ignorespaces 3-way Arbitrage, Variable Rates GA Runs\relax }}{12}{table.caption.22}

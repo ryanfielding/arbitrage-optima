@@ -14,7 +14,7 @@ global pCAD
 [pUSD, pCAD] = fees();
 
 %initial $10k USD
-x0=10; %thousand
+x0=10000; %thousand
 
 A = [];
 b = [];
@@ -22,9 +22,9 @@ Aeq = [];
 beq = [];
 %bounds with 5y high/low, x0 of 
 lb = [0,0,1.19558,1.19558];
-ub = [x0,60,1.46520,1.46520];
+ub = [x0,60000,1.46520,1.46520];
 nonlcon=@trade2MAX;
-xStart = [1000 1000 1.4 1.4];
+xStart = [10000 10000 1.4 1.4];
 
 %min are the optimum
 % min(1) = amount to send to CAD
@@ -38,7 +38,10 @@ profit = -fval-x0
 gain = profit/x0
 optRes(fval, profit, gain, out.iterations, out.funcCount,'2FMResults');
 
-[min2,fval2,exitflag,out2,population,scores] = ga(@optimize, 4, [],[],[],[],lb,ub,nonlcon);
+opts = optimoptions('ga');
+opts.FunctionTolerance = 1E-6;
+opts.ConstraintTolerance = 1E-6;
+[min2,fval2,exitflag,out2,population,scores] = ga(@optimize, 4, [],[],[],[],lb,ub,nonlcon,opts);
 
 profit2 = -fval2-x0
 gain2 = profit2/x0
@@ -63,7 +66,7 @@ end
 function [c,ceq]=trade2MAX(x)
     %this constraint implies that one cannot send back to USD more than they
     %receive from USD from first exchange
-    c(1)=(x(1)-usdFee(x(1)))*x(3) - x(2);
+    c(1)=-(x(1)-usdFee(x(1)))*x(3) + x(2);
     ceq=[];
 end
 
@@ -93,21 +96,21 @@ function [p1, p2] = fees()
     feeCAD = polyval(p2,x);
     
   
-    f=figure
-    plot(x,yCAD,'o')
-    hold on
-    grid on
-    title('TransferWise Fees USD/CAD')
-    plot(x,yUSD,'r*')
-    plot(x,feeUSD,'r-')
-    plot(x,feeCAD,'b-')
-    axis([0  15000  0  150])
-    ylabel('$ Fee Cost')
-    xlabel('$ Transfer Amount')
-    legend('CAD Fee Points','USD Fee Points','Polyfit USD Fee','Polyfit CAD Fee','Location','southeast');
-    hold off
-    saveas(f,'fees.png')
-    movefile *.png Report/latex/figures
+%     f=figure
+%     plot(x,yCAD,'o')
+%     hold on
+%     grid on
+%     title('TransferWise Fees USD/CAD')
+%     plot(x,yUSD,'r*')
+%     plot(x,feeUSD,'r-')
+%     plot(x,feeCAD,'b-')
+%     axis([0  15000  0  150])
+%     ylabel('$ Fee Cost')
+%     xlabel('$ Transfer Amount')
+%     legend('CAD Fee Points','USD Fee Points','Polyfit USD Fee','Polyfit CAD Fee','Location','southeast');
+%     hold off
+%     saveas(f,'fees.png')
+%     movefile *.png Report/latex/figures
 
 end
 

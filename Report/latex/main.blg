@@ -1,11 +1,18 @@
 This is BibTeX, Version 0.99d (TeX Live 2017)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
+A level-1 auxiliary file: tables/2FMResults.aux
+A level-1 auxiliary file: tables/2GAResults.aux
+A level-1 auxiliary file: tables/2aXOpt.aux
+A level-1 auxiliary file: tables/aFMResults.aux
+A level-1 auxiliary file: tables/aGAResults.aux
+A level-1 auxiliary file: tables/aX_Results.aux
 A level-1 auxiliary file: tables/vFMResults.aux
 A level-1 auxiliary file: tables/vFMRates.aux
 A level-1 auxiliary file: tables/vGAResults.aux
 A level-1 auxiliary file: tables/vGARates.aux
 A level-1 auxiliary file: tables/vX_Results.aux
+A level-1 auxiliary file: tables/vGATrials.aux
 The style file: IEEE/IEEEtran.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -20,44 +27,44 @@ Database file #2: IEEE/biblio.bib
 ** IEEEtran BST control entry "IEEEexample:BSTcontrol" detected.
 
 Done.
-You've used 2 entries,
+You've used 6 entries,
             4024 wiz_defined-function locations,
-            1188 strings with 14619 characters,
-and the built_in function-call counts, 592 in all, are:
-= -- 28
-> -- 17
+            1208 strings with 15072 characters,
+and the built_in function-call counts, 1492 in all, are:
+= -- 82
+> -- 18
 < -- 3
-+ -- 9
-- -- 5
-* -- 35
-:= -- 114
-add.period$ -- 1
-call.type$ -- 2
++ -- 12
+- -- 4
+* -- 65
+:= -- 269
+add.period$ -- 5
+call.type$ -- 6
 change.case$ -- 5
 chr.to.int$ -- 15
-cite$ -- 2
-duplicate$ -- 47
-empty$ -- 38
-format.name$ -- 1
-if$ -- 99
+cite$ -- 6
+duplicate$ -- 141
+empty$ -- 136
+format.name$ -- 0
+if$ -- 285
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 8
-newline$ -- 29
-num.names$ -- 1
-pop$ -- 27
+int.to.str$ -- 5
+missing$ -- 31
+newline$ -- 49
+num.names$ -- 0
+pop$ -- 95
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 4
-skip$ -- 30
+skip$ -- 106
 stack$ -- 0
 substring$ -- 3
-swap$ -- 17
+swap$ -- 58
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 2
+type$ -- 6
 warning$ -- 0
-while$ -- 6
-width$ -- 2
-write$ -- 32
+while$ -- 5
+width$ -- 6
+write$ -- 63
