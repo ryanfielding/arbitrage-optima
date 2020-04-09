@@ -50,6 +50,12 @@
 \emph{Investopedia}. [Online]. Available:
   \url{https://www.investopedia.com/trading/using-currency-correlations-advantage/}
 \BIBentrySTDinterwordspacing
+
+\bibitem{ry}
+\BIBentryALTinterwordspacing
+R.~Fielding, \emph{Arbitrage Optima - Github}. [Online]. Available:
+  \url{https://github.com/ryanfielding/arbitrage-optima}
+\BIBentrySTDinterwordspacing
 \renewcommand{\BIBentryALTinterwordstretchfactor}{4}
 
 \end{thebibliography}
