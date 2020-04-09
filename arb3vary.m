@@ -2,28 +2,20 @@ clc;
 clear all;
 close all;
 
-%% Testing
-
-%transfer fee polyfits
-global pUSD
-global pCAD
-[pUSD, pCAD] = fees();
+%% 3-way Currency Arbitrage Optimization
+%with exchange rate variation
+addpath('functions');
 
 %cad, usd, eur
 %col by row means currency 1 to currency 2
 %eg. element (2,1) is cad to usd exchange rate
 cad2usd = 0.7085;
 cad2eur = 0.6559;
-cad2yen = 77.2049;
 usd2cad = 1.4113;
 usd2eur = 0.9260;
-usd2yen = 108.833;
 eur2cad = 1.52448;
 eur2usd = 1.0799;
-eur2yen = 117.618;
-yen2cad = 0.0129508;
-yen2usd = 0.00918840;
-yen2eur = 0.00850212;
+
 global EXrates x0
 %initial amount 10000 CAD
 x0 = 10; %thousand
@@ -37,13 +29,8 @@ x = zeros(1,12);
 
 Aeq = [];
 beq = [];
-
-%what goes into one currency <= what goes out
 A = [];
 b = [];
-
-%lb = [0,0,1.2,1.2];
-%ub = [20000,40000,1.5,1.5];
 
 %finds 0.0048 profit
 %xGuess = [0 10 10 10 0 10 10 10 0 0.713554 0.66 .9];
@@ -51,29 +38,21 @@ b = [];
 %xGuess=[0,1.45956047181335,4.36166553397463,7.27194070618012,0,5.64212289465898,0.00552664825793103,9.99999998644946,0,0.799999995962151,0.600000004715667,0.999999986584457];
 %finds 1.147
 %xGuess=[0,9.99242501921721,1.60319216391258e-06,1.79994172185933,0,8.85986264219077,9.99999984985734,1.60089391853419,0,0.650000000000000,0.749999981783946,0.850000000000000];
-%finds 0.3819
-xGuess=[0,8.75266172520550,2.32746313743225,8.64661087348664,0,6.68752910409166,7.12717579347866,4.84865467546798,0,0.680176110219948,0.675591051281899,0.866237297766703];
+%finds 0.3145
+%xGuess=[0,8.75266172520550,2.32746313743225,8.64661087348664,0,6.68752910409166,7.12717579347866,4.84865467546798,0,0.680176110219948,0.675591051281899,0.866237297766703];
 
-
-% A = [];
-% b = [];
-% Aeq = [];
-% beq = [];
 nonlcon=@varyRates;
-lb = [0,0,0,0,0,0,0,0,0, 0.65, 0.60, 0.85];
-ub = [0,10,10,10,0,10,10,10,0,0.8,0.75,1.0];
+lb = [0,0,0,0,0,0,0,0,0,0.68250,0.61961,0.79937];
+ub = [0,10,10,10,0,10,10,10,0,0.83642,0.76188,0.96242];
+xGuess = ub;
 [x, fval, exit, out] = fmincon(@optimize,xGuess,A,b,Aeq,beq,lb,ub,nonlcon);
-% 
 
-% profit = prof(min)
-% T = table(min,'VariableNames',{'X'})
-% 
-
-fminconRates=EXrates;
-
+fminconRates=EXrates
 profit = -fval-x0
 gain = profit/x0
-x
+
+optRes(fval, profit, gain, out.iterations, out.funcCount,'vFMResults');
+ratesRes(fminconRates,'vFMRates');
 
 opts = optimoptions('ga');
 opts.FunctionTolerance = 1E-6;
@@ -81,14 +60,36 @@ opts.ConstraintTolerance = 1E-6;
 %ensures the losses at each other currency (usd or eur) is 10 cents max
 [x2, fval2, exit2, out2] = ga(@optimize,12,A,b,Aeq,beq,lb,ub,nonlcon,opts);
 
-gaRates=EXrates;
-
+gaRates=EXrates
 profit2 = -fval2-x0
 gain2 = profit2/x0
-x2
 
-%% Practicality by reading historical exchange rate data
-%USDCADHistoricalData = importfile('USD_CAD Historical Data.csv', [2, 59])
+optRes(fval2, profit2, gain2, out2.generations, out2.funccount,'vGAResults');
+ratesRes(gaRates,'vGARates');
+
+xTable(x,x2,'vX_Results');
+
+%% Run GA a few times
+X_OptGA.Data = { 'Optimum' '\$CAD2CAD' '\$USD2CAD' '\$EUR2CAD'...
+        '\$CAD2USD' '\$USD2USD' '\$EUR2USD' '\$CAD2EUR' '\$USD2EUR' '\$EUR2EUR'...
+        'Rate CAD2USD' 'Rate CAD2EUR' 'Rate USD2EUR' }';
+for i=1:6 
+    [x3, fval3, exit3, out3] = ga(@optimize,12,A,b,Aeq,beq,lb,ub,nonlcon,opts);
+    Trial(i,:) = [fval3 x3];
+end
+X_OptGA.Run1=Trial(1,:)';
+X_OptGA.Run2=Trial(2,:)';
+X_OptGA.Run3=Trial(3,:)';
+X_OptGA.Run4=Trial(4,:)';
+X_OptGA.Run5=Trial(5,:)';
+X_OptGA.Run6=Trial(6,:)';
+X_OptGA=struct2table(X_OptGA);
+table2latex(X_OptGA,'vGATrials');
+
+%%Move Latex files to folder
+movefile *.tex Report/latex/tables
+
+%% Functions
 
 function f = optimize(x)
     global EXrates x0
@@ -96,10 +97,6 @@ function f = optimize(x)
     %initial amount + conversions from other currencies = final amount +
     %conversions to other currencies
     f = -(x0 + (EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
-end
-
-function f = prof(x)
-    f = (x(1)-usdFee(x(1)))*x(3) + (x(2) - cadFee(x(2)))/x(4) - 2*x(1); %in USD
 end
 
 function [c,ceq]=varyRates(x)
@@ -114,8 +111,6 @@ function [c,ceq]=varyRates(x)
     eur2cad = 1/cad2eur;
     eur2usd = 1/usd2eur;
     
-   
-
     global EXrates
     EXrates = [ 1       usd2cad eur2cad;
             cad2usd 1       eur2usd;
@@ -131,90 +126,19 @@ function [c,ceq]=varyRates(x)
     %ceq(3) = x(4) + x(8) + x(12) - EXrates(4,1)*x(13) - EXrates(4,2)*x(14) - EXrates(4,3)*x(15);
     %cad to eur
     
-    c=[];
+    %f <= -x0 to ensure gains are the only found optima
+    %f = -(x0 + (EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
+    c(1) = -((EXrates(1,2)*x(2) + EXrates(1,3)*x(3)) - (x(4) + x(7)));
 end
 
-function fee = usdFee(val)
-    %Fee to send USD to CAD
-    global pUSD
-    fee = polyval(pUSD,val);
-end
-
-function fee = cadFee(val)
-    %Fee to send USD to CAD
-    global pCAD
-    fee = polyval(pCAD,val);
-end
-
-function [p1, p2] = fees()
-    %% Poly fit fee data
-    x = [100 500 1000 5000 10000 15000]';
-    yUSD = [1.99 5.48 9.86 44.82 88.53 132.24]';
-    yCAD = [3.22 6.95 11.61 48.92 78.84 114.58]';
-
-    p1 = polyfit(x,yUSD,4);
+function xTable(x1,x2,name)
     
-    p2 = polyfit(x,yCAD,4);
-    
-    feeUSD = polyval(p1,x);
-    feeCAD = polyval(p2,x);
-    
-  
-%     figure
-%     plot(x,yCAD,'o')
-%     hold on
-%     plot(x,yUSD,'r*')
-%     plot(x,feeUSD,'r-')
-%     plot(x,feeCAD,'b-')
-%     axis([0  15000  0  150])
-%     hold off
-end
-
-function USDCADHistoricalData = importfile(filename, dataLines)
-%IMPORTFILE Import data from a text file
-%  USDCADHISTORICALDATA = IMPORTFILE(FILENAME) reads data from text file
-%  FILENAME for the default selection.  Returns the data as a table.
-%
-%  USDCADHISTORICALDATA = IMPORTFILE(FILE, DATALINES) reads data for the
-%  specified row interval(s) of text file FILENAME. Specify DATALINES as
-%  a positive scalar integer or a N-by-2 array of positive scalar
-%  integers for dis-contiguous row intervals.
-%
-%  Example:
-%  USDCADHistoricalData = importfile("/Users/Ryan/Repos/optimization/USD_CAD Historical Data.csv", [2, 56]);
-%
-%  See also READTABLE.
-%
-% Auto-generated by MATLAB on 20-Mar-2020 21:57:07
-
-%% Input handling
-
-% If dataLines is not specified, define defaults
-if nargin < 2
-    dataLines = [2, Inf];
-end
-
-%% Setup the Import Options and import the data
-opts = delimitedTextImportOptions("NumVariables", 6);
-
-% Specify range and delimiter
-opts.DataLines = dataLines;
-opts.Delimiter = ",";
-
-% Specify column names and types
-opts.VariableNames = ["Date", "Price", "Open", "High", "Low", "Change"];
-opts.VariableTypes = ["datetime", "double", "double", "double", "double", "double"];
-
-% Specify file level properties
-opts.ExtraColumnsRule = "ignore";
-opts.EmptyLineRule = "read";
-
-% Specify variable properties
-opts = setvaropts(opts, "Date", "InputFormat", "dd-MMM-yy");
-opts = setvaropts(opts, "Change", "TrimNonNumeric", true);
-opts = setvaropts(opts, "Change", "ThousandsSeparator", ",");
-
-% Import the data
-USDCADHistoricalData = readtable(filename, opts);
+    X_Opt.X = { '\$CAD2CAD' '\$USD2CAD' '\$EUR2CAD'...
+        '\$CAD2USD' '\$USD2USD' '\$EUR2USD' '\$CAD2EUR' '\$USD2EUR' '\$EUR2EUR'...
+        'Rate CAD2USD' 'Rate CAD2EUR' 'Rate USD2EUR' }';
+    X_Opt.FMOptima = x1';
+    X_Opt.GAOptima = x2';
+    X_Opt=struct2table(X_Opt);
+    table2latex(X_Opt,name);
 
 end
